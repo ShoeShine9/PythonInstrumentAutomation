@@ -7,7 +7,7 @@ class SignalGenerator(InstrumentResource):
     def __init__(self, resource_name, sim_path=None, verbose=False):
         super().__init__(resource_name, sim_path)
         self.verbose = verbose
-        self.inst_name = str(self.query("*IDN?")).split(',')[1]
+        self.inst_name = self.query("*IDN?").split(',')[1]
         if self.inst_name not in InstrumentNames.CosSignalGenerators:
             print("The specified VISA resource is not known and/or tested by COS, driver may not interface correctly.")
         self.__name__ = self.inst_name
@@ -31,7 +31,7 @@ class SignalGenerator(InstrumentResource):
 
     def get_output_state(self):
         state = self.query("OUTP:STATE?")
-        if int(state.strip('\n')) is 1:
+        if int(state) is 1:
             return True
         else:
             return False
@@ -86,7 +86,7 @@ class SignalGenerator(InstrumentResource):
             print("Set {} mode to {}".format(self.inst_name, sweep_mode))
 
     def get_mode(self):
-        return str(self.query("FREQ:MODE?")).strip('\n')
+        return self.query("FREQ:MODE?")
 
     def setup_sweep(self, start_frequency, stop_frequency, start_now=True, start_from_start=True, sweep_type="AUTO", sweep_mode="SWEEP", step_size=0.1, dwell_time_ms=5, unit="MHz"):
         switcher = {
