@@ -99,4 +99,5 @@ class SignalGenerator(InstrumentResource):
     def stop_sweep(self):
         self.set_mode("CW")
 
-
+    def test(self):
+        pass
