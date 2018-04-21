@@ -18,7 +18,7 @@ class InstrumentResource:
 
     def query(self, message):
         try:
-            return self.device.query(message)
+            return str(self.device.query(message))
         except InstrumentExceptions.InstrumentNotResponding:
             print("Could not query {}, instrument did not respond to {}".\
                   format("device", "command"))
@@ -26,13 +26,13 @@ class InstrumentResource:
 
     def read(self):
         try:
-            return self.device.read()
+            return str(self.device.read())
         except InstrumentExceptions.InstrumentNotResponding:
             print("Could not read from {}, instrument did not respond to {}". \
                   format("device", "command"))
             # someday come back and figure out how to get the class name and method
 
-    def close(self, name):
+    def close(self):
         try:
             self.device.close()
             print("Connection to {} has been closed".format("device"))
