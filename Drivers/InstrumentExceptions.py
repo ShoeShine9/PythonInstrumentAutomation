@@ -15,9 +15,9 @@ class InstrumentNotResponding(Exception):
 
 class IncorrectAddress(Exception):
     def __init__(self, inst_name):
-        print("the visa resource address specified is for {}".format(inst_name))
+        print("The visa resource address specified is for {}".format(inst_name))
 
 
 class InvalidValue(Exception):
     def __init__(self, value):
-        print("the value {} is not valid for this command".format(value))
+        print("The value {} is not valid for this command".format(value))
